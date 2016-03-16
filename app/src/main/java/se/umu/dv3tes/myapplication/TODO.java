@@ -12,5 +12,7 @@ public class TODO {
     HPBAR
     |      |          |           |          |
 
+    ONDA powerups och vanliga powerups
+
      */
 }
