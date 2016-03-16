@@ -24,16 +24,22 @@ public class GameThread extends Thread {
     public void run(){
         long lastTime = System.nanoTime();
         final double amountOfTicks = 30;
-        double ns = 1000000000 / amountOfTicks;
+        long ns = Math.round(1000000000 / amountOfTicks);
         double delta = 0;
         while(gameRunning){
             long now = System.nanoTime();
+            long wait = ns -(now-lastTime);
             delta += (now - lastTime) / ns;
             lastTime = now;
-            while(delta >= 1){
-                gamePanel.tick();
-                delta--;
-            }
+            wait=wait < 0 ? 0 : wait;
+           /* try {
+                this.sleep(wait);
+            } catch (InterruptedException e) {
+                Log.e("Sleep", e.getMessage());
+            }*/
+             while(delta >= 1){
+                 gamePanel.tick();
+                 delta--; }
             canvas=null;
             try{
                 canvas=surfaceHolder.lockCanvas();
