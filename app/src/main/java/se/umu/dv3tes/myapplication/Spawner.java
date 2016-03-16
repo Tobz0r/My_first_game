@@ -31,22 +31,16 @@ public class Spawner {
            // hud.setLevel(hud.getLevel() + 1);
             if (level == 1) {
                 handler.addObject(new FlyingEnemy(player, BitmapFactory.decodeResource(res, R.drawable.flying1), width, height, handler,5,res));
-
-               // handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 100), r.nextInt(Game.HEIGHT - 100), ID.BasicEnemy, handler));
-               // handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 100), r.nextInt(Game.HEIGHT - 100), ID.BasicEnemy, handler));
             }
             if(level%2==0){
                 handler.addObject(new FlyingEnemy(player, BitmapFactory.decodeResource(res, R.drawable.flying1), width, height, handler,5,res));
                 handler.addObject(new FlyingEnemy(player, BitmapFactory.decodeResource(res, R.drawable.flying1), width, height, handler,5,res));
             }
             if (level % 10 == 0) {
-               // handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - 100), r.nextInt(Game.HEIGHT - 100), ID.FastEnemy, handler));
             }
             if (level % 25 == 0) {
-              //  handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 100), r.nextInt(Game.HEIGHT - 100), ID.SmartEnemy, handler));
             }
             if (level % 5 == 0) {
-               // handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 100), r.nextInt(Game.HEIGHT - 100), ID.BasicEnemy, handler));
             }
         }
 
