@@ -28,7 +28,6 @@ public class Spawner {
         if (scoreKeep >= 100) {
             scoreKeep = 0;
             level++;
-           // hud.setLevel(hud.getLevel() + 1);
             if (level == 1) {
                 handler.addObject(new FlyingEnemy(player, BitmapFactory.decodeResource(res, R.drawable.flying1), width, height, handler,5,res));
             }
