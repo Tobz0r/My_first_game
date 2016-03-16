@@ -19,8 +19,7 @@ public class Animator {
     public void setDelay(long d){delay = d;}
     public void setFrame(int i){currentFrame= i;}
 
-    public void tick()
-    {
+    public void tick() {
         long elapsed = (System.nanoTime()-startTime)/1000000;
 
         if(elapsed>delay)

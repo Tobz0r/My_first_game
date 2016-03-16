@@ -55,6 +55,7 @@ public class BasicEnemy extends GameObject implements Enemy {
             setVelX(0);
         }
         if(health<=0){
+            player.addScore(100);
             handler.removeObject(this);
         }
         animator.tick();

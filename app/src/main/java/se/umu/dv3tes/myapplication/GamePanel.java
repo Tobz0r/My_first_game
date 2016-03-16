@@ -67,7 +67,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        handler.addObject(new Projectile(player, BitmapFactory.decodeResource(getResources(), R.drawable.test), (int) event.getX(), (int) event.getY(), handler));
+        handler.addObject(new BasicProjectile(player, BitmapFactory.decodeResource(getResources(), R.drawable.test), (int) event.getX(), (int) event.getY(), handler,player));
         return super.onTouchEvent(event);
     }
 

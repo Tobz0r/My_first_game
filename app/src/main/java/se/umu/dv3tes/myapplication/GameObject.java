@@ -97,5 +97,13 @@ public abstract class GameObject {
         return resizedBitmap;
     }
 
+    public float calculateDistance(int targetX, int targetY){
+        float deltaX = getX() - targetX;
+        float deltaY = getY() - targetY;
+        float distance = (float) Math.sqrt((deltaX * deltaX) + (deltaY * deltaY));
+        return distance;
+    }
+
+
 
 }

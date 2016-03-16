@@ -26,9 +26,15 @@ public class Handler {
                 if (temp instanceof Projectile) {
                     for (int j = 0; j < gameObjects.size(); j++) {
                         GameObject temp_enemy = gameObjects.get(j);
-                        if (temp_enemy instanceof Enemy) {
+                        if (temp_enemy instanceof Enemy && !((Projectile) temp).isHostile()) {
                             if (temp.getBounds().intersect(temp_enemy.getBounds())) {
                                 ((Enemy) temp_enemy).attackThis();
+                                gameObjects.remove(temp);
+                            }
+                        }
+                        else if(temp_enemy instanceof Player &&((Projectile) temp).isHostile()){
+                            if (temp.getBounds().intersect(temp_enemy.getBounds())) {
+                                ((Player) temp_enemy).attackThis(1000);
                                 gameObjects.remove(temp);
                             }
                         }

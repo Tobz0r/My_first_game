@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         gamePanel=new GamePanel(this);
         setContentView(gamePanel);
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
         //set to full screen
 
     }
