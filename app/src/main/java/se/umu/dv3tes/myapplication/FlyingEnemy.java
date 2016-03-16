@@ -1,6 +1,8 @@
 package se.umu.dv3tes.myapplication;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 /**
@@ -9,32 +11,61 @@ import android.graphics.Canvas;
 public class FlyingEnemy extends GameObject implements Enemy {
     private Player player;
     private Bitmap image;
+    private Bitmap[] images;
+    private int ticks;
+    private Animator animator;
     private Handler handler;
     private int health;
 
-    public FlyingEnemy(Player player,Bitmap image,int x, int y, Handler handler){
+    public FlyingEnemy(Player player,Bitmap image,int x, int y, Handler handler,int numFrames,Resources res){
         this.image=image;
+        ticks=0;
         this.player=player;
         this.handler=handler;
-        setX((float)x);
-        setY((float) y);
+        animator=new Animator();
+        setX(x);
         health=10;
-        setWidth(image.getWidth());
-        setHeight(image.getHeight());
+        setWidth(image.getWidth() / 3);
+        setHeight(image.getHeight() / 3);
         setVelY(0);
         setVelX(-10);
+        images=new Bitmap[numFrames];
+        images[0]= BitmapFactory.decodeResource(res, R.drawable.flying1);
+        images[1]= BitmapFactory.decodeResource(res, R.drawable.flying2);
+        images[2]= BitmapFactory.decodeResource(res, R.drawable.flying3);
+        images[3]= BitmapFactory.decodeResource(res, R.drawable.flying4);
+        images[4]= BitmapFactory.decodeResource(res, R.drawable.flying5);
+        animator.setImages(images);
+        animator.setDelay(50);
     }
 
     @Override
     public void tick() {
-        setX(getX()+getVelX());
-        setY(getY()+getVelY());
-
+        setX(getX() + getVelX());
+        setY(getY() + getVelY());
+        if (getBounds().intersect(player.getBounds())) {
+            setAttacking(true);
+            setVelX(0);
+        }
+        if(health<=0){
+            handler.removeObject(this);
+        }
+        animator.tick();
+        if(isAttacking()) {
+            ticks++;
+            animator.tick();
+            if(ticks>=60){
+                player.attackThis(1000);
+                ticks=0;
+            }
+        }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(image, getX()+getWidth(), getY()+getHeight(), null);
+        setY(canvas.getHeight()-(getHeight()*3));
+        image=animator.getImage();
+        canvas.drawBitmap(image, getX(), getY(), null);
     }
 
     @Override

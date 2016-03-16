@@ -41,11 +41,7 @@ public class BasicEnemy extends GameObject implements Enemy {
             //  images[i] = Bitmap.createBitmap(image,i*width,0,width,height);
             images[i]=this.image;
         }
-        images[0]= BitmapFactory.decodeResource(res, R.drawable.flying1);
-        images[1]= BitmapFactory.decodeResource(res, R.drawable.flying2);
-        images[2]= BitmapFactory.decodeResource(res, R.drawable.flying3);
-        images[3]= BitmapFactory.decodeResource(res, R.drawable.flying4);
-        images[4]= BitmapFactory.decodeResource(res, R.drawable.flying5);
+
         animator.setImages(images);
         animator.setDelay(50);
     }

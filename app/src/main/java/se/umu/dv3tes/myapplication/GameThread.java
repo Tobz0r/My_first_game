@@ -49,36 +49,6 @@ public class GameThread extends Thread {
                 }
             }
         }
-     /*   long lastLoopTime = System.nanoTime();
-        final long OPTIMAL_TIME = 1000000000 / MAX_FPS;
-        while (gameRunning) {
-            long now = System.nanoTime();
-            canvas=null;
-            try{
-                canvas=surfaceHolder.lockCanvas();
-                synchronized (surfaceHolder){
-                    gamePanel.tick();
-                    gamePanel.draw(canvas);
-                }
-            }catch (Exception e){
-
-            }
-            finally {
-                if(canvas!=null){
-                    surfaceHolder.unlockCanvasAndPost(canvas);
-                }
-            }
-            long updateLength = now - lastLoopTime;
-            long sleepTime=(lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000;
-            sleepTime= sleepTime>0 ? sleepTime : 0;
-            lastLoopTime = now;
-           // double delta = updateLength / ((double)OPTIMAL_TIME);
-            try{
-                this.sleep(sleepTime);
-            }catch (InterruptedException | IllegalArgumentException e){
-                Log.e("Error",e.getLocalizedMessage());
-            }
-        }*/
     }
 
     public void setGameRunning(boolean gameRunning){

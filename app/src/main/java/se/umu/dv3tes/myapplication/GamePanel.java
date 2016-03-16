@@ -34,7 +34,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         gameOver=false;
         this.context=context;
         handler=new Handler();
-        spawner=new Spawner(handler);
         getHolder().addCallback(this);
         gameThread=new GameThread(getHolder(),this);
         setFocusable(true);
@@ -51,6 +50,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         gameThread.setGameRunning(true);
         gameThread.start();
         handler.addObject(player);
+        spawner=new Spawner(handler,getResources(),player,getWidth(),getHeight());
+
 
     }
 
@@ -67,7 +68,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event){
         handler.addObject(new Projectile(player, BitmapFactory.decodeResource(getResources(), R.drawable.test), (int) event.getX(), (int) event.getY(), handler));
-        handler.addObject(new BasicEnemy(player, BitmapFactory.decodeResource(getResources(), R.drawable.flying1), getWidth(), getHeight(), handler,5,getResources()));
         return super.onTouchEvent(event);
     }
 
@@ -76,6 +76,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             gameOver=true;
             System.out.println("jebane");
             Intent i=new Intent(context,EndActivity.class);
+            i.putExtra("Score", player.getScore());
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(i);
             ((Activity)context).finish();
