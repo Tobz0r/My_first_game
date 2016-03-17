@@ -12,10 +12,6 @@ public class Position {
         this.y=y;
     }
 
-    public Position(Long x, Long y){
-        this.x=x.intValue();
-        this.y=y.intValue();
-    }
 
     public int getX(){
         return x;

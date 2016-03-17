@@ -53,9 +53,15 @@ public class BasicProjectile extends GameObject implements Projectile {
     }
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(image, getX(),getY(), null);
+        canvas.drawBitmap(image, getX(), getY(), null);
     }
 
+    public void finishProjectile(){
+        if(image!=null) {
+            image.recycle();
+            image = null;
+        }
+    }
 
     @Override
     public boolean isHostile() {

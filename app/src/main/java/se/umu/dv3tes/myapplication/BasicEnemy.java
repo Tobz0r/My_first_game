@@ -25,7 +25,7 @@ public class BasicEnemy extends GameObject implements Enemy {
 
     public BasicEnemy(Player player,Bitmap image,int x, int y, Handler handler,int numFrames,Resources res){
         this.image=image;
-        health=20;
+        health=START_HEALTH;
         ticks=0;
         setAttacking(false);
         this.handler=handler;
@@ -82,8 +82,9 @@ public class BasicEnemy extends GameObject implements Enemy {
 
     @Override
     public void attackThis() {
-        health-=20;
+        health-=25;
     }
+
 
     public String toString(){
         return "BasicEnemy";

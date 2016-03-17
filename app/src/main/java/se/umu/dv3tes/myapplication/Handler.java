@@ -29,12 +29,14 @@ public class Handler {
                         if (temp_enemy instanceof Enemy && !((Projectile) temp).isHostile()) {
                             if (temp.getBounds().intersect(temp_enemy.getBounds())) {
                                 ((Enemy) temp_enemy).attackThis();
+                                ((Projectile) temp).finishProjectile();
                                 gameObjects.remove(temp);
                             }
                         }
                         else if(temp_enemy instanceof Player &&((Projectile) temp).isHostile()){
                             if (temp.getBounds().intersect(temp_enemy.getBounds())) {
                                 ((Player) temp_enemy).attackThis(1000);
+                                ((Projectile) temp).finishProjectile();
                                 gameObjects.remove(temp);
                             }
                         }

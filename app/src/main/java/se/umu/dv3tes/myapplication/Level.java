@@ -36,6 +36,14 @@ public class Level {
             canvas.drawBitmap(image,x+width,y,null);
         }
     }
+    public static float clamp(float x, float min, float max){
+        if(x >= max)
+            return x= max;
+        else if (x<= min)
+            return x=min;
+        else
+            return x;
+    }
 
 
 

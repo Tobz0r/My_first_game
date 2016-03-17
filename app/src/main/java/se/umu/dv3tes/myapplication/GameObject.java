@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.Paint;
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -15,6 +16,7 @@ public abstract class GameObject {
     private float velY;
     private int width;
     private int height;
+    protected final static int START_HEALTH=100;
     private boolean attacking;
 
     public boolean isAttacking() {
@@ -80,11 +82,18 @@ public abstract class GameObject {
         return new Rect((int)x,(int)y,(int)x+(width*3),(int)y+(height*3));
     }
 
+    public Rect getHealthBar(float health){
+        float startHealth=(width*3);
+        float scale=health/START_HEALTH;
+        float currentHealth=startHealth*scale;
+        return new Rect((int)x, (int) y,(int)(x+currentHealth),(int)y+height/3);
+    }
+
     public abstract void tick();
 
     public abstract void draw(Canvas canvas);
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
         float scaleWidth = ((float) newWidth) / width;

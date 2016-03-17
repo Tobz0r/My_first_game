@@ -23,7 +23,7 @@ public class GameThread extends Thread {
     @Override
     public void run(){
         long lastTime = System.nanoTime();
-        final double amountOfTicks = 30;
+        final double amountOfTicks = 60;
         long ns = Math.round(1000000000 / amountOfTicks);
         double delta = 0;
         while(gameRunning){

@@ -20,7 +20,7 @@ public class Player extends GameObject {
         animator=new Animator();
         this.image=image;
         score=0;
-        health=2000;
+        health=200000;
         setHeight(image.getHeight()/3);
         setWidth(image.getWidth()/3);
         setX(10);

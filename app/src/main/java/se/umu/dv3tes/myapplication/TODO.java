@@ -9,7 +9,7 @@ public class TODO {
     Ändra getX och getY i gameobject till Position
     Sprites och animations
     http://stackoverflow.com/questions/28719993/android-studio-action-bar-color-not-changing
-    HPBAR
+    HPBAR ÖVER GUBBAR
     |      |          |           |          |
 
     ONDA powerups och vanliga powerups

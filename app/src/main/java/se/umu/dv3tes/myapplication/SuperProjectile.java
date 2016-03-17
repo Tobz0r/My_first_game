@@ -55,4 +55,10 @@ public class SuperProjectile extends GameObject implements Projectile {
     public boolean isHostile() {
         return false;
     }
+
+    @Override
+    public void finishProjectile() {
+        image.recycle();
+        image=null;
+    }
 }

@@ -7,5 +7,6 @@ package se.umu.dv3tes.myapplication;
 public interface Projectile   {
 
     boolean isHostile();
+    void finishProjectile();
 
 }
