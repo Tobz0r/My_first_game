@@ -1,4 +1,4 @@
-package se.umu.dv3tes.myapplication;
+package se.umu.dv3tes.myapplication.Model;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,13 +6,20 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.ArrayList;
-import java.util.List;
+import se.umu.dv3tes.myapplication.Activitys.EndActivity;
+import se.umu.dv3tes.myapplication.Activitys.MainActivity;
+import se.umu.dv3tes.myapplication.GameLogic.GameThread;
+import se.umu.dv3tes.myapplication.GameLogic.Handler;
+import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
+import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
+import se.umu.dv3tes.myapplication.R;
+import se.umu.dv3tes.myapplication.GameLogic.Spawner;
+import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
+
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -27,6 +34,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Player player;
     private boolean gameOver;
     private Context context;
+    private HUD hud;
 
 
     public GamePanel(Context context){
@@ -37,8 +45,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         gameThread=new GameThread(getHolder(),this);
         setFocusable(true);
-
-
+        BasicProjectile.setPicture(BitmapFactory.decodeResource(getResources(), R.drawable.test));
     }
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -51,6 +58,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         gameThread.start();
         handler.addObject(player);
         spawner=new Spawner(handler,getResources(),player,getWidth(),getHeight());
+        hud=new HUD(player);
 
 
     }
@@ -62,12 +70,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+        try {
+            gameThread.stopThread();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        handler.addObject(new BasicProjectile(player, BitmapFactory.decodeResource(getResources(), R.drawable.test), (int) event.getX(), (int) event.getY(), handler,player));
+        spawner.spawnProjectiles((int)event.getX(),(int)event.getY());
+        System.out.println(event.getX()+ " " + event.getY());
         return super.onTouchEvent(event);
     }
 
@@ -77,6 +90,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             System.out.println("jebane");
             Intent i=new Intent(context,EndActivity.class);
             i.putExtra("Score", player.getScore());
+            i.putExtra("Level", spawner.getLevel());
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(i);
             ((Activity)context).finish();
@@ -84,6 +98,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         level.tick();
         spawner.tick();
         handler.tick();
+        hud.tick();
 
     }
     @Override
@@ -96,6 +111,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             final int savedState=canvas.save();
             canvas.scale(scaleX, scaleY);
             level.draw(canvas);
+            hud.draw(canvas);
             canvas.restoreToCount(savedState);
             handler.draw(canvas);
 

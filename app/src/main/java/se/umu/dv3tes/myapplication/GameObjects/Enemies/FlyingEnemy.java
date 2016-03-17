@@ -1,4 +1,4 @@
-package se.umu.dv3tes.myapplication;
+package se.umu.dv3tes.myapplication.GameObjects.Enemies;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,6 +8,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.Random;
+
+import se.umu.dv3tes.myapplication.Model.Animator;
+import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
+import se.umu.dv3tes.myapplication.GameObjects.GameObject;
+import se.umu.dv3tes.myapplication.GameLogic.Handler;
+import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
+import se.umu.dv3tes.myapplication.R;
+
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -38,7 +46,7 @@ public class FlyingEnemy extends GameObject implements Enemy {
         setVelY(0);
         setVelX(-10);
 
-      //  opts.inJustDecodeBounds=true;
+        //  opts.inJustDecodeBounds=true;
         goalDistance =calculateDistance((int)player.getX(),(int)player.getY())/3;
         if(movingImages==null){
             initiateBitmaps(numFrames,res,image);
@@ -64,6 +72,7 @@ public class FlyingEnemy extends GameObject implements Enemy {
 
     @Override
     public void tick() {
+
         float distance= calculateDistance((int)player.getX(),(int)player.getY());
         if(goalDistance>= distance ||(getX()<=0)){
             setAttacking(true);
@@ -73,10 +82,6 @@ public class FlyingEnemy extends GameObject implements Enemy {
         setY(getY() + getVelY());
         if(health<=0){
             player.addScore(100);
-           /* for(Bitmap tempImage:movingImages){
-                tempImage.recycle();
-                tempImage=null;
-            }*/
             handler.removeObject(this);
         }
         animator.tick();
@@ -84,7 +89,7 @@ public class FlyingEnemy extends GameObject implements Enemy {
             ticks++;
             animator.tick();
             if(ticks>=60){
-                handler.addObject(new BasicProjectile(player, BitmapFactory.decodeResource(res, R.drawable.test), (int) player.getX(), (int) player.getY(), handler,this));
+                handler.addObject(new BasicProjectile(player, (int) player.getX(), (int) player.getY(), handler,this));
                 ticks=0;
             }
         }
@@ -92,8 +97,7 @@ public class FlyingEnemy extends GameObject implements Enemy {
 
     @Override
     public void draw(Canvas canvas) {
-       // setY(canvas.getHeight() - (getHeight() * 9));
-       // setY(canvas.getHeight()/2);
+
         if(spawned) {
             Random rn = new Random();
             setY(getHeight() + rn.nextInt((canvas.getHeight() - (getHeight() * 3)) - getHeight() + 1));
@@ -103,7 +107,7 @@ public class FlyingEnemy extends GameObject implements Enemy {
         Paint myPaint = new Paint();
         myPaint.setColor(Color.rgb(75, health*2, 0));
         myPaint.setStrokeWidth(10);
-        canvas.drawRect(getHealthBar(health),myPaint);
+        canvas.drawRect(getHealthBar(health), myPaint);
         canvas.drawBitmap(image, getX(), getY(), null);
 
     }
@@ -115,6 +119,10 @@ public class FlyingEnemy extends GameObject implements Enemy {
     @Override
     public void attackThis() {
         health-=34;
+    }
+
+    public String toString(){
+        return "FlyingEnemy";
     }
 }
       /*  Paint myPaint = new Paint();

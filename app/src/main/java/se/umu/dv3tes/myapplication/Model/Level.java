@@ -1,12 +1,9 @@
-package se.umu.dv3tes.myapplication;
+package se.umu.dv3tes.myapplication.Model;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.util.Base64;
-import android.view.Display;
+
+import se.umu.dv3tes.myapplication.Model.GamePanel;
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -24,10 +21,7 @@ public class Level {
     }
 
     public void tick(){
-        x+=dx;
-        if(x<-GamePanel.WIDTH){
-            x=0;
-        }
+
 
     }
     public void draw(Canvas canvas){

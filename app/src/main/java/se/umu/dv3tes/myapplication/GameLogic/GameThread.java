@@ -1,8 +1,10 @@
-package se.umu.dv3tes.myapplication;
+package se.umu.dv3tes.myapplication.GameLogic;
 
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
+
+import se.umu.dv3tes.myapplication.Model.GamePanel;
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -22,21 +24,20 @@ public class GameThread extends Thread {
 
     @Override
     public void run(){
-        long lastTime = System.nanoTime();
+        long lastTime = System.currentTimeMillis();
         final double amountOfTicks = 60;
-        long ns = Math.round(1000000000 / amountOfTicks);
+        long ns = Math.round(1000 / amountOfTicks);
         double delta = 0;
         while(gameRunning){
-            long now = System.nanoTime();
+            long now = System.currentTimeMillis();
             long wait = ns -(now-lastTime);
             delta += (now - lastTime) / ns;
             lastTime = now;
             wait=wait < 0 ? 0 : wait;
-           /* try {
+            System.out.println(wait);
+            /*try {
                 this.sleep(wait);
-            } catch (InterruptedException e) {
-                Log.e("Sleep", e.getMessage());
-            }*/
+            } catch (Exception e) {}*/
              while(delta >= 1){
                  gamePanel.tick();
                  delta--; }
@@ -56,7 +57,11 @@ public class GameThread extends Thread {
             }
         }
     }
+    public void stopThread() throws InterruptedException {
+        gameRunning=false;
+        join();
 
+    }
     public void setGameRunning(boolean gameRunning){
         this.gameRunning=gameRunning;
     }

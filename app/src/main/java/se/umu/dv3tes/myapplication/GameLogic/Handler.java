@@ -1,10 +1,15 @@
-package se.umu.dv3tes.myapplication;
+package se.umu.dv3tes.myapplication.GameLogic;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import se.umu.dv3tes.myapplication.GameObjects.Enemies.Enemy;
+import se.umu.dv3tes.myapplication.GameObjects.GameObject;
+import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
+import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
+import se.umu.dv3tes.myapplication.GameObjects.Projectiles.Projectile;
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -13,6 +18,7 @@ public class Handler {
 
     private List<GameObject> gameObjects;
     private static Object lockObject=new Object();
+    private final int projectileDamage=1;
 
     public Handler(){
         gameObjects=new ArrayList<>();
@@ -35,7 +41,7 @@ public class Handler {
                         }
                         else if(temp_enemy instanceof Player &&((Projectile) temp).isHostile()){
                             if (temp.getBounds().intersect(temp_enemy.getBounds())) {
-                                ((Player) temp_enemy).attackThis(1000);
+                                ((Player) temp_enemy).attackThis(projectileDamage);
                                 ((Projectile) temp).finishProjectile();
                                 gameObjects.remove(temp);
                             }
@@ -64,6 +70,16 @@ public class Handler {
         synchronized (lockObject) {
             gameObjects.remove(object);
         }
+    }
+    public List<BasicProjectile> getProjectiles(){
+        List<BasicProjectile> projectiles=new ArrayList<>();
+        for(int i=0; i < gameObjects.size(); i++){
+            GameObject temp=gameObjects.get(i);
+            if(temp instanceof BasicProjectile){
+                projectiles.add((BasicProjectile)temp);
+            }
+        }
+        return projectiles;
     }
 
 }

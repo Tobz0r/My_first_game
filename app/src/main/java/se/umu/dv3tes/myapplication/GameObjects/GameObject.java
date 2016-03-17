@@ -1,4 +1,4 @@
-package se.umu.dv3tes.myapplication;
+package se.umu.dv3tes.myapplication.GameObjects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

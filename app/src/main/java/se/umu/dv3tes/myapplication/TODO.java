@@ -6,10 +6,10 @@ package se.umu.dv3tes.myapplication;
 public class TODO {
 
     /*
-    Ändra getX och getY i gameobject till Position
+    Ändra getX och getY i gameobject till Position check
     Sprites och animations
     http://stackoverflow.com/questions/28719993/android-studio-action-bar-color-not-changing
-    HPBAR ÖVER GUBBAR
+    HPBAR ÖVER GUBBAR check
     |      |          |           |          |
 
     ONDA powerups och vanliga powerups
