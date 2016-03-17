@@ -24,17 +24,16 @@ public class GameThread extends Thread {
 
     @Override
     public void run(){
-        long lastTime = System.currentTimeMillis();
+        long lastTime = System.nanoTime();
         final double amountOfTicks = 60;
-        long ns = Math.round(1000 / amountOfTicks);
+        long ns = Math.round(1000000000 / amountOfTicks);
         double delta = 0;
         while(gameRunning){
-            long now = System.currentTimeMillis();
+            long now = System.nanoTime();
             long wait = ns -(now-lastTime);
             delta += (now - lastTime) / ns;
             lastTime = now;
             wait=wait < 0 ? 0 : wait;
-            System.out.println(wait);
             /*try {
                 this.sleep(wait);
             } catch (Exception e) {}*/

@@ -19,11 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activitys.GameActivity" />
+        <activity
+            android:name=".Activitys.GameActivity"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".Activitys.EndActivity"
             android:label="@string/title_activity_end"
-            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
         </activity>
 

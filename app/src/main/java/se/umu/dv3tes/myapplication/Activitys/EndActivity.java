@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.R;
 
 public class EndActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class EndActivity extends AppCompatActivity {
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                Intent i=new Intent(getApplicationContext(),GameActivity.class);
                 startActivity(i);
                 EndActivity.this.finish();
             }

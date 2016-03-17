@@ -13,6 +13,7 @@ public class HUD {
 
     private Player player;
     private int health;
+    private final int fullHealth=100;
     private int score;
 
     public HUD(Player player){
@@ -25,12 +26,12 @@ public class HUD {
 
     }
     public void draw(Canvas canvas){
-        health= health>=0 ? health : 0;
+        health= health>0 ? health : 0;
         Paint myPaint = new Paint();
         if(!player.isGotPower()) {
             myPaint.setColor(Color.BLACK);
             myPaint.setStyle(Paint.Style.STROKE);
-            canvas.drawRect(15, 15, (health * 3) + 2, 70, myPaint);
+            canvas.drawRect(15, 15, (fullHealth*3) + 2, 70, myPaint);
             myPaint.setColor(Color.rgb(75, health * 2, 0));
             myPaint.setStyle(Paint.Style.FILL);
             canvas.drawRect(15, 15, health * 3, 68, myPaint);

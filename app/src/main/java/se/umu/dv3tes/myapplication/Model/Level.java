@@ -20,10 +20,6 @@ public class Level {
         height=image.getHeight();
     }
 
-    public void tick(){
-
-
-    }
     public void draw(Canvas canvas){
         canvas.drawBitmap(image,x,y,null);
         if(x < 0){

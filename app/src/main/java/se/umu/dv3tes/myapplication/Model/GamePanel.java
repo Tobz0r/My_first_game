@@ -95,7 +95,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             getContext().startActivity(i);
             ((Activity)context).finish();
         }
-        level.tick();
         spawner.tick();
         handler.tick();
         hud.tick();

@@ -14,5 +14,9 @@ public class TODO {
 
     ONDA powerups och vanliga powerups
 
+    ANIMATION PÅ PLAYER
+    ATTACKANIMATION PÅ LANDGUBBE
+    XML SKIT
+
      */
 }

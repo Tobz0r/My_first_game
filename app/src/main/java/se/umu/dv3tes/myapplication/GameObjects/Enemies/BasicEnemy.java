@@ -24,7 +24,6 @@ public class BasicEnemy extends GameObject implements Enemy {
     private Animator animator;
     private Handler handler;
     private int health;
-    private float goalDistance;
     private Resources res;
     private boolean spawned=true;
     private final int damage=2;
@@ -42,9 +41,6 @@ public class BasicEnemy extends GameObject implements Enemy {
         setHeight(image.getHeight() / 9);
         setVelY(0);
         setVelX(-5);
-
-        //  opts.inJustDecodeBounds=true;
-        goalDistance =calculateDistance((int)player.getX(),(int)player.getY())/3;
         if(movingImages==null){
             initiateBitmaps(numFrames,res,image);
         }
