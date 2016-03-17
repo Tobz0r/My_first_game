@@ -26,7 +26,7 @@ public class HUD {
 
     }
     public void draw(Canvas canvas){
-        health= health>0 ? health : 0;
+        health= health>0 ? health : 1;
         Paint myPaint = new Paint();
         if(!player.isGotPower()) {
             myPaint.setColor(Color.BLACK);
