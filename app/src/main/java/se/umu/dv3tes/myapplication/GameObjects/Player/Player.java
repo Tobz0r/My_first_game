@@ -14,7 +14,7 @@ public class Player extends GameObject {
     private Bitmap image;
     private Bitmap[] images;
     private int score;
-    private int health;
+    private float health;
     private long startTime;
     private Animator animator;
     private Powerups powerup;
@@ -78,7 +78,7 @@ public class Player extends GameObject {
     public void addScore(int score){
         this.score+=score;
     }
-    public int getHealth(){
+    public float getHealth(){
         return health;
     }
     public boolean isAlive(){

@@ -58,14 +58,17 @@ public class Spawner {
     public void tick() {
 
         scoreKeep++;
+        int powerUpValue=(random.nextInt(1000)+1);
+        if(powerUpValue<=2){
+            if(powerUpValue==2) {
+                handler.addObject(new DefensiveShield(player, handler, shieldPicture, width));
+            }else {
+                handler.addObject(new EvilDecoy(player, handler, deathPicture, width));
+            }
+        }
         if (scoreKeep >= 100) {
             scoreKeep = 0;
             level++;
-            handler.addObject(new EvilDecoy(player,handler,deathPicture,width));
-            if((random.nextInt(1000)+1)==1){
-                handler.addObject(new DefensiveShield(player,handler,shieldPicture,width));
-                handler.addObject(new EvilDecoy(player,handler,deathPicture,width));
-            }
             if (level == 1) {
                 handler.addObject(new BasicEnemy(player, walkingPicture, width, height, handler,5,res));
                 handler.addObject(new DefensiveShield(player,handler,shieldPicture,width));

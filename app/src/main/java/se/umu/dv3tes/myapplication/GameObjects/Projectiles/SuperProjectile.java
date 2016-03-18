@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 
 import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.GameLogic.Handler;
-import se.umu.dv3tes.myapplication.Position;
+import se.umu.dv3tes.myapplication.GameObjects.Position;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 
 

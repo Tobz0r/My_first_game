@@ -20,6 +20,7 @@ public class BasicEnemy extends GameObject implements Enemy {
     private Player player;
     private Bitmap image;
     private static Bitmap[] movingImages;
+    private static Bitmap[] attackingImages;
     private int ticks;
     private Animator animator;
     private Handler handler;
@@ -56,11 +57,16 @@ public class BasicEnemy extends GameObject implements Enemy {
         opts.inMutable=true;
         opts.inTempStorage=new byte[32 * 1024];
         movingImages =new Bitmap[numFrames];
+        attackingImages=new Bitmap[numFrames-1];
         movingImages[0]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking1,opts),image.getWidth()/3,image.getHeight()/3);
         movingImages[1]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking2,opts), image.getWidth() / 3, image.getHeight() / 3);
         movingImages[2]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking3,opts), image.getWidth() / 3, image.getHeight() / 3);
         movingImages[3]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking4,opts), image.getWidth() / 3, image.getHeight() / 3);
         movingImages[4]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking1,opts), image.getWidth() / 3, image.getHeight() / 3);
+        attackingImages[0]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack1,opts),image.getWidth()/3,image.getHeight()/3);
+        attackingImages[1]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack2,opts), image.getWidth() / 3, image.getHeight() / 3);
+        attackingImages[2]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack3,opts), image.getWidth() / 3, image.getHeight() / 3);
+        attackingImages[3]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack4,opts), image.getWidth() / 3, image.getHeight() / 3);
     }
 
     @Override
@@ -68,8 +74,9 @@ public class BasicEnemy extends GameObject implements Enemy {
 
         setX(getX() + getVelX());
         setY(getY() + getVelY());
-        if (getBounds().intersect(player.getBounds())) {
+        if (getBounds().intersect(player.getBounds()) && !isAttacking()) {
             setAttacking(true);
+            animator.setImages(attackingImages);
             setVelX(0);
         }
         if(health<=0){

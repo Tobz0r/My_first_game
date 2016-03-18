@@ -12,7 +12,7 @@ import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 public class HUD {
 
     private Player player;
-    private int health;
+    private float health;
     private final int fullHealth=100;
     private int score;
 
@@ -26,21 +26,20 @@ public class HUD {
 
     }
     public void draw(Canvas canvas){
-        health= health>0 ? health : 1;
+        float greenValue=health*2;
+        health= health>1 ? health : 5;
         Paint myPaint = new Paint();
         if(!player.isGotPower()) {
             myPaint.setColor(Color.BLACK);
             myPaint.setStyle(Paint.Style.STROKE);
             canvas.drawRect(15, 15, (fullHealth*3) + 2, 70, myPaint);
-            myPaint.setColor(Color.rgb(75, health * 2, 0));
+            myPaint.setColor(Color.rgb(75, (int)greenValue, 0));
             myPaint.setStyle(Paint.Style.FILL);
             canvas.drawRect(15, 15, health * 3, 68, myPaint);
         }else{
             myPaint.setStyle(Paint.Style.FILL);
             myPaint.setColor(Color.WHITE);
             canvas.drawRect(15, 15, health * 3, 68, myPaint);
-
-
         }
     }
 }

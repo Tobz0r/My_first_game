@@ -1,5 +1,6 @@
 package se.umu.dv3tes.myapplication.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -46,5 +47,11 @@ public class GameActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed(){
+        Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
+        GameActivity.this.finish();
     }
 }

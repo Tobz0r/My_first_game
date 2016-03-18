@@ -35,6 +35,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private boolean gameOver;
     private Context context;
     private HUD hud;
+    private float xAxis = 0f;
+    private float yAxis = 0f;
+
+    private float lastXAxis = 0f;
+    private float lastYAxis = 0f;
 
 
     public GamePanel(Context context){
@@ -78,11 +83,34 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
-        spawner.spawnProjectiles((int)event.getX(),(int)event.getY());
-        System.out.println(event.getX()+ " " + event.getY());
-        return super.onTouchEvent(event);
+    public boolean onTouchEvent(MotionEvent event) {
+        float fingerOneX=0,fingerOneY=0,fingerTwoX=0,fingerTwoY=0;
+        int action = event.getAction() & MotionEvent.ACTION_MASK;
+        int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+        int pointerId = event.getPointerId(pointerIndex);
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                fingerOneX=event.getX();
+                fingerOneY=event.getY();
+                spawner.spawnProjectiles((int)fingerOneX,(int)fingerOneY);
+            case MotionEvent.ACTION_POINTER_DOWN:
+
+                if (pointerId == 0) {
+                    fingerOneX = event.getX(pointerIndex);
+                    fingerOneY = event.getY(pointerIndex);
+                    spawner.spawnProjectiles((int)fingerOneX,(int)fingerOneY);
+                }
+                if (pointerId == 1) {
+                    fingerTwoX = event.getX(pointerIndex);
+                    fingerTwoY = event.getY(pointerIndex);
+                    spawner.spawnProjectiles((int) fingerTwoX, (int) fingerTwoY);
+                }
+                break;
+        }
+        return true;
+
     }
+
 
     public void tick(){
         if(!player.isAlive() && !gameOver){
