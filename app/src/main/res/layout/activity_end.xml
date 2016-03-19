@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="JEBANE"
+        android:text="YOUR SCORE"
         android:id="@+id/textView"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="107dp"
@@ -25,15 +25,24 @@
         android:text="Play Again?"
         android:id="@+id/playBtn"
         android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/editText"
+        android:layout_marginTop="27dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Enter Your Name"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="Enter your name" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save score"
+        android:id="@+id/saveBtn"
+        android:layout_alignBottom="@+id/playBtn"
+        android:layout_toStartOf="@+id/playBtn" />
 </RelativeLayout>

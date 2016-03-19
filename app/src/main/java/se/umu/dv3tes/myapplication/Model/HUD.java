@@ -14,7 +14,6 @@ public class HUD {
     private Player player;
     private float health;
     private final int fullHealth=100;
-    private int score;
 
     public HUD(Player player){
         this.player=player;
@@ -22,8 +21,6 @@ public class HUD {
 
     public void tick(){
         health=player.getHealth();
-        score=player.getScore();
-
     }
     public void draw(Canvas canvas){
         float greenValue=health*2;

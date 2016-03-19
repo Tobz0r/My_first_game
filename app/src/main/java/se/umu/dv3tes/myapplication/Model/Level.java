@@ -11,7 +11,7 @@ import se.umu.dv3tes.myapplication.Model.GamePanel;
 public class Level {
 
     private Bitmap image;
-    private int x,y,dx,dy;
+    private int x,y;
     private int width,height;
 
     public Level(Bitmap image){
@@ -26,16 +26,5 @@ public class Level {
             canvas.drawBitmap(image,x+width,y,null);
         }
     }
-    public static float clamp(float x, float min, float max){
-        if(x >= max)
-            return x= max;
-        else if (x<= min)
-            return x=min;
-        else
-            return x;
-    }
-
-
-
 
 }

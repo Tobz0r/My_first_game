@@ -16,8 +16,9 @@ public class TODO {
 
     ANIMATION PÅ PLAYER
     ATTACKANIMATION PÅ LANDGUBBE   ✓
-    XML SKIT
-    MULTITOUCH
+    XML SKIT                        ✓
+    MULTITOUCH                      ✓
+    HIGHSCORE                       ✓
 
      */
 }

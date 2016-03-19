@@ -1,7 +1,6 @@
 package se.umu.dv3tes.myapplication.GameLogic;
 
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.SurfaceHolder;
 
 import se.umu.dv3tes.myapplication.Model.GamePanel;

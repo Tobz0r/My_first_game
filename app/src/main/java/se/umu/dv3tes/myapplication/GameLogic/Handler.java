@@ -18,7 +18,7 @@ public class Handler {
 
     private List<GameObject> gameObjects;
     private static Object lockObject=new Object();
-    private final int projectileDamage=1;
+    private final int projectileDamage=3;
 
     public Handler(){
         gameObjects=new ArrayList<>();
@@ -71,7 +71,7 @@ public class Handler {
             gameObjects.remove(object);
         }
     }
-    public List<BasicProjectile> getProjectiles(){
+    public  List<BasicProjectile> getProjectiles(){
         List<BasicProjectile> projectiles=new ArrayList<>();
         for(int i=0; i < gameObjects.size(); i++){
             GameObject temp=gameObjects.get(i);

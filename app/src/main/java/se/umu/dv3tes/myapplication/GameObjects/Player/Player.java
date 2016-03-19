@@ -1,11 +1,16 @@
 package se.umu.dv3tes.myapplication.GameObjects.Player;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import se.umu.dv3tes.myapplication.Model.Animator;
 import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.Powerups.Powerups;
+import se.umu.dv3tes.myapplication.R;
 
 /**
  * Created by Tobz0r on 2016-03-15.
@@ -21,19 +26,19 @@ public class Player extends GameObject {
     private boolean gotPower=false;
     private int powerTicks=0;
 
-    public Player(Bitmap image, int width, int height, int numFrames){
+    public Player(Bitmap image, int width, int height, int numFrames,Resources res){
         animator=new Animator();
         this.image=image;
         score=0;
         health=START_HEALTH;
         setHeight(image.getHeight()/3);
-        setWidth(image.getWidth()/3);
+        setWidth(image.getWidth() / 3);
         setX(10);
         images=new Bitmap[numFrames];
-        for(int i=0; i < images.length;i++){
-            //  images[i] = Bitmap.createBitmap(image,i*width,0,width,height);
-            images[i]=this.image;
-        }
+        images[0]=BitmapFactory.decodeResource(res, R.drawable.player1);
+        images[1]=BitmapFactory.decodeResource(res, R.drawable.player2);
+        images[2]=BitmapFactory.decodeResource(res, R.drawable.player3);
+        images[3]=BitmapFactory.decodeResource(res, R.drawable.player4);
         animator.setImages(images);
         animator.setDelay(10);
         startTime=System.nanoTime();
@@ -50,7 +55,7 @@ public class Player extends GameObject {
         if(isAttacking()){
             animator.tick();
         }
-        if(gotPower && powerup==Powerups.DEFENSE){
+        if(gotPower){
             powerTicks++;
             if(powerTicks>=600){
                 powerup=Powerups.NONE;
@@ -62,7 +67,10 @@ public class Player extends GameObject {
 
     @Override
     public void draw(Canvas canvas){
-        setY(canvas.getHeight()-(getHeight()*3));
+        setY(canvas.getHeight() - (getHeight() * 3));
+        Paint myPaint=new Paint();
+        myPaint.setColor(Color.BLUE);
+        canvas.drawRect(getBounds(),myPaint);
         canvas.drawBitmap(animator.getImage(),getX(),getY(),null);
     }
 
@@ -88,6 +96,9 @@ public class Player extends GameObject {
         this.powerup=powerups;
         gotPower=true;
         powerTicks=0;
+    }
+    public Powerups getPowerup(){
+        return powerup;
     }
     public boolean isGotPower(){
         return gotPower;

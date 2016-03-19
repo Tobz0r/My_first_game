@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,6 +17,7 @@ import se.umu.dv3tes.myapplication.GameLogic.GameThread;
 import se.umu.dv3tes.myapplication.GameLogic.Handler;
 import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
+import se.umu.dv3tes.myapplication.Powerups.Powerups;
 import se.umu.dv3tes.myapplication.R;
 import se.umu.dv3tes.myapplication.GameLogic.Spawner;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
@@ -25,8 +27,8 @@ import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
  * Created by Tobz0r on 2016-03-15.
  */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
-    public static  int WIDTH;
-    public static  int HEIGHT;
+    public   int WIDTH;
+    public   int HEIGHT;
     private GameThread gameThread;
     private Spawner spawner;
     private Level level;
@@ -35,11 +37,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private boolean gameOver;
     private Context context;
     private HUD hud;
-    private float xAxis = 0f;
-    private float yAxis = 0f;
 
-    private float lastXAxis = 0f;
-    private float lastYAxis = 0f;
+    private MediaPlayer mediaPlayer;
 
 
     public GamePanel(Context context){
@@ -50,7 +49,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         gameThread=new GameThread(getHolder(),this);
         setFocusable(true);
-        BasicProjectile.setPicture(BitmapFactory.decodeResource(getResources(), R.drawable.test));
+        BasicProjectile.setPicture(BitmapFactory.decodeResource(getResources(), R.drawable.projectile));
+        BasicProjectile.setHostileImage(BitmapFactory.decodeResource(getResources(), R.drawable.test));
     }
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -58,12 +58,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         level=new Level(levelImage);
         WIDTH=levelImage.getWidth();
         HEIGHT=levelImage.getHeight();
-        player=new Player(BitmapFactory.decodeResource(getResources(),R.drawable.tower),100,getHeight(),5);
+        player=new Player(BitmapFactory.decodeResource(getResources(),R.drawable.player1),100,getHeight(),4,getResources());
         gameThread.setGameRunning(true);
         gameThread.start();
         handler.addObject(player);
         spawner=new Spawner(handler,getResources(),player,getWidth(),getHeight());
         hud=new HUD(player);
+
+        mediaPlayer = MediaPlayer.create(context,R.raw.lazer);
+        mediaPlayer.setLooping(false); // Set looping
+        mediaPlayer.setVolume(50, 50);
 
 
     }
@@ -84,26 +88,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float fingerOneX=0,fingerOneY=0,fingerTwoX=0,fingerTwoY=0;
         int action = event.getAction() & MotionEvent.ACTION_MASK;
         int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
         int pointerId = event.getPointerId(pointerIndex);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                fingerOneX=event.getX();
-                fingerOneY=event.getY();
-                spawner.spawnProjectiles((int)fingerOneX,(int)fingerOneY);
+                spawner.spawnProjectiles((int) event.getX(), (int) event.getY());
+                player.setAttacking(true);
+                break;
             case MotionEvent.ACTION_POINTER_DOWN:
-
                 if (pointerId == 0) {
-                    fingerOneX = event.getX(pointerIndex);
-                    fingerOneY = event.getY(pointerIndex);
-                    spawner.spawnProjectiles((int)fingerOneX,(int)fingerOneY);
+                    spawner.spawnProjectiles((int) event.getX(pointerIndex), (int) event.getY(pointerIndex));
+                    player.setAttacking(true);
                 }
-                if (pointerId == 1) {
-                    fingerTwoX = event.getX(pointerIndex);
-                    fingerTwoY = event.getY(pointerIndex);
-                    spawner.spawnProjectiles((int) fingerTwoX, (int) fingerTwoY);
+                if (pointerId == 1 && player.getPowerup()== Powerups.ATTACK) {
+                    spawner.spawnProjectiles((int) event.getX(pointerIndex), (int) event.getY(pointerIndex));
+                    player.setAttacking(true);
                 }
                 break;
         }
@@ -121,7 +121,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             i.putExtra("Level", spawner.getLevel());
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(i);
-            ((Activity)context).finish();
+            mediaPlayer.stop();
+            ((Activity) context).finish();
         }
         spawner.tick();
         handler.tick();

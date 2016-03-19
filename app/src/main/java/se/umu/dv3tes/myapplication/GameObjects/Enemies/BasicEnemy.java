@@ -58,20 +58,28 @@ public class BasicEnemy extends GameObject implements Enemy {
         opts.inTempStorage=new byte[32 * 1024];
         movingImages =new Bitmap[numFrames];
         attackingImages=new Bitmap[numFrames-1];
-        movingImages[0]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking1,opts),image.getWidth()/3,image.getHeight()/3);
-        movingImages[1]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking2,opts), image.getWidth() / 3, image.getHeight() / 3);
-        movingImages[2]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking3,opts), image.getWidth() / 3, image.getHeight() / 3);
-        movingImages[3]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking4,opts), image.getWidth() / 3, image.getHeight() / 3);
-        movingImages[4]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.walking1,opts), image.getWidth() / 3, image.getHeight() / 3);
-        attackingImages[0]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack1,opts),image.getWidth()/3,image.getHeight()/3);
-        attackingImages[1]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack2,opts), image.getWidth() / 3, image.getHeight() / 3);
-        attackingImages[2]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack3,opts), image.getWidth() / 3, image.getHeight() / 3);
-        attackingImages[3]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.attack4,opts), image.getWidth() / 3, image.getHeight() / 3);
+        movingImages[0]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.walking1,opts),image.getWidth()/3,image.getHeight()/3);
+        movingImages[1]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.walking2,opts), image.getWidth() / 3, image.getHeight() / 3);
+        movingImages[2]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.walking3,opts), image.getWidth() / 3, image.getHeight() / 3);
+        movingImages[3]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.walking4,opts), image.getWidth() / 3, image.getHeight() / 3);
+        movingImages[4]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.walking1,opts), image.getWidth() / 3, image.getHeight() / 3);
+        attackingImages[0]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.attack1,opts),image.getWidth()/3,image.getHeight()/3);
+        attackingImages[1]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.attack2,opts), image.getWidth() / 3, image.getHeight() / 3);
+        attackingImages[2]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.attack3,opts), image.getWidth() / 3, image.getHeight() / 3);
+        attackingImages[3]= getResizedBitmap(BitmapFactory.decodeResource(res,
+                R.drawable.attack4,opts), image.getWidth() / 3, image.getHeight() / 3);
     }
 
     @Override
     public void tick() {
-
         setX(getX() + getVelX());
         setY(getY() + getVelY());
         if (getBounds().intersect(player.getBounds()) && !isAttacking()) {
@@ -107,18 +115,10 @@ public class BasicEnemy extends GameObject implements Enemy {
 
     /**
      * Gets called when you damage a flying enemy,
-     * a flying enemy takes 3 hits to kill
+     * a basic enemy takes 4 hits to kill
      */
     @Override
     public void attackThis() {
         health-=25;
     }
-
-    public String toString(){
-        return "FlyingEnemy";
-    }
 }
-      /*  Paint myPaint = new Paint();
-        myPaint.setColor(Color.rgb(0, 0, 0));
-        myPaint.setStrokeWidth(10);
-        canvas.drawRect(getBounds(),myPaint);*/

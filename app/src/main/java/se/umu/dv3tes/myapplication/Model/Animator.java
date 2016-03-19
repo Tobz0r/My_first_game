@@ -17,13 +17,10 @@ public class Animator {
         startTime=System.nanoTime();
     }
     public void setDelay(long d){delay = d;}
-    public void setFrame(int i){currentFrame= i;}
-
     public void tick() {
         long elapsed = (System.nanoTime()-startTime)/1000000;
 
-        if(elapsed>delay)
-        {
+        if(elapsed>delay) {
             currentFrame++;
             startTime = System.nanoTime();
         }
@@ -34,8 +31,4 @@ public class Animator {
     public Bitmap getImage(){
         return images[currentFrame];
     }
-    public int getFrame(){return currentFrame;}
-
-
-
 }
