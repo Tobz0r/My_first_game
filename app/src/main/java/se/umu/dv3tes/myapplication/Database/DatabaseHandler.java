@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Used to handle a database with the highscore
+ * @author Tobias Estefors
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -27,11 +28,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Called when the database is created for the first time. This is where the
+     * creation of tables and the initial population of the tables should happen.
+     * @param db a database
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_HIGHSCORE + "(" + KEY_NAME + " TEXT," + KEY_SCORE + " TEXT)");
     }
 
+    /**
+     * Called when the database needs to be upgraded. The implementation
+     * should use this method to drop tables, add tables, or do anything else it
+     * needs to upgrade to the new schema version.
+     * @param db The database.
+     * @param oldVersion The old database version.
+     * @param newVersion The new database version.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HIGHSCORE);
@@ -39,7 +53,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
+    /**
+     * Add a highscore to the databasetable
+     * @param name the name of the player
+     * @param score the players score
+     */
     public void addHighscore(String name, int score) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -51,7 +69,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-
+    /**
+     * Returns a sorted list of all players in the database
+     * @return a sorted list of all players
+     */
     public List<PlayerScore> getAllPlayers() {
         List<PlayerScore> players = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
@@ -81,11 +102,4 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         return players;
     }
-    public void clearHighscore() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HIGHSCORE);
-        onCreate(db);
-    }
-
-
 }

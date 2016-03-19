@@ -13,9 +13,11 @@ import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
 
 
 /**
- * Created by Tobz0r on 2016-03-17.
+ * Decoy used to be a evil powerup so when the player kills it
+ * the player takes damage
+ * @author Tobias Estefors
  */
-public class EvilDecoy extends GameObject implements Powerup {
+public class DecoyPowerup extends GameObject implements Powerup {
 
     private Handler handler;
     private Player player;
@@ -23,7 +25,7 @@ public class EvilDecoy extends GameObject implements Powerup {
     private Bitmap image;
     private final int damage=10;
 
-    public EvilDecoy(Player player, Handler handler, Bitmap image, int x){
+    public DecoyPowerup(Player player, Handler handler, Bitmap image, int x){
         setVelX(0);
         setVelY(5);
         setY(0);
@@ -37,6 +39,9 @@ public class EvilDecoy extends GameObject implements Powerup {
     }
 
 
+    /**
+     * Updates the gamestate for this powerup
+     */
     @Override
     public void tick() {
         setX(getX() + getVelX());
@@ -53,6 +58,10 @@ public class EvilDecoy extends GameObject implements Powerup {
         }
     }
 
+    /**
+     * Draws this powerup on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image, getX(), getY(), null);

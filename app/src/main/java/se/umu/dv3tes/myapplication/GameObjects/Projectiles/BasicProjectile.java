@@ -2,17 +2,16 @@ package se.umu.dv3tes.myapplication.GameObjects.Projectiles;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.widget.Button;
 
 import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.GameLogic.Handler;
-import se.umu.dv3tes.myapplication.GameObjects.Position;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 
 
-
 /**
- * Credit for the sprites goes to Boo at www.spriters-resource.com/
+ * Projectile is used to give damage to enemies for the player
+ * or give damage to the player for the enemies
+ * @author Tobias Estefors
  */
 public class BasicProjectile extends GameObject implements Projectile {
 
@@ -42,6 +41,9 @@ public class BasicProjectile extends GameObject implements Projectile {
         }
     }
 
+    /**
+     * Updates this projectiles gamestate
+     */
     @Override
     public void tick() {
 
@@ -58,24 +60,42 @@ public class BasicProjectile extends GameObject implements Projectile {
             }
         }
     }
+
+    /**
+     * Draw this projectile on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(projectileImage, getX(), getY(), null);
     }
 
-    public void finishProjectile(){
 
-    }
-
+    /**
+     * sets the image for the players projectile
+     * @param imagePara the image
+     */
     public static void setPicture(Bitmap imagePara){
         image=imagePara;
     }
+
+    /**
+     * Sets the image for the hostile projectiles
+     * @param imagepara the image
+     */
     public static void setHostileImage(Bitmap imagepara){
         hostileImage=imagepara;
     }
 
+    /**
+     * Indicates if this projectile is shot by the player or by
+     * an enemy
+     * @return true if by an enemy, else false
+     */
     @Override
     public boolean isHostile() {
         return hostileProjectile;
     }
+
+
 }

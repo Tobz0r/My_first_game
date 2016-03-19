@@ -22,6 +22,10 @@ import se.umu.dv3tes.myapplication.Database.DatabaseHandler;
 import se.umu.dv3tes.myapplication.Database.PlayerScore;
 import se.umu.dv3tes.myapplication.R;
 
+/**
+ * Endscreen when the game is finished
+ * @author Tobias Estefors
+ */
 public class EndActivity extends AppCompatActivity {
 
     private EditText nameEdit;

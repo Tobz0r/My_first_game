@@ -7,7 +7,9 @@ import android.graphics.Paint;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 
 /**
- * Created by Tobz0r on 2016-03-17.
+ * The hud is the healthbar used to show the
+ * user how much health he has left
+ * @author Tobias Estefors
  */
 public class HUD {
 
@@ -19,9 +21,17 @@ public class HUD {
         this.player=player;
     }
 
+    /**
+     * Updates what health the player have
+     */
     public void tick(){
         health=player.getHealth();
     }
+
+    /**
+     * Draw a healthbar on the board
+     * @param canvas the board
+     */
     public void draw(Canvas canvas){
         float greenValue=health*2;
         health= health>1 ? health : 5;

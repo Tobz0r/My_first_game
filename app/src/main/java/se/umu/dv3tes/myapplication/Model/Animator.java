@@ -3,7 +3,8 @@ package se.umu.dv3tes.myapplication.Model;
 import android.graphics.Bitmap;
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * Used to animate all gameobjects
+ * @author Tobias Estefors
  */
 public class Animator {
     private Bitmap[] images;
@@ -11,12 +12,26 @@ public class Animator {
     private long startTime;
     private long delay;
 
+    /**
+     * Sets the images to be animates
+     * @param images the imagearray
+     */
     public void setImages(Bitmap[] images){
         this.images=images;
         currentFrame=0;
         startTime=System.nanoTime();
     }
+
+    /**
+     * Set how long time it shall be between each image
+     * @param d the delay in miliseconds
+     */
     public void setDelay(long d){delay = d;}
+
+    /**
+     * Changes the picture for the gameobject if the timeframe
+     * has been met
+     */
     public void tick() {
         long elapsed = (System.nanoTime()-startTime)/1000000;
 
@@ -28,6 +43,11 @@ public class Animator {
             currentFrame = 0;
         }
     }
+
+    /**
+     * Returns what the current image is
+     * @return the image
+     */
     public Bitmap getImage(){
         return images[currentFrame];
     }

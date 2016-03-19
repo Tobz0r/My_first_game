@@ -21,6 +21,9 @@ import se.umu.dv3tes.myapplication.Database.DatabaseHandler;
 import se.umu.dv3tes.myapplication.Database.PlayerScore;
 import se.umu.dv3tes.myapplication.R;
 
+/**
+ * 
+ */
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHandler db;

@@ -12,7 +12,9 @@ import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
 import se.umu.dv3tes.myapplication.GameObjects.Projectiles.Projectile;
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * Contains all objects used in the game and uses their
+ * tick- and drawmethods
+ * @author Tobias Estefors
  */
 public class Handler {
 
@@ -24,6 +26,9 @@ public class Handler {
         gameObjects=new ArrayList<>();
     }
 
+    /**
+     * Updates every gameobject's gamestate
+     */
     public void tick() {
         synchronized (lockObject) {
             for (int i = 0; i < gameObjects.size(); i++) {
@@ -53,6 +58,11 @@ public class Handler {
             }
         }
     }
+
+    /**
+     * Draw every gameobject on the phone
+     * @param canvas the drawable screen
+     */
     public void draw(Canvas canvas){
         synchronized (lockObject) {
             for(int i=0; i < gameObjects.size();i++){
@@ -61,16 +71,32 @@ public class Handler {
         }
     }
 
+    /**
+     *Add a gameobject to the handlers list
+     * @param object a gameobject
+     */
     public void addObject(GameObject object){
         synchronized (lockObject) {
             gameObjects.add(object);
         }
     }
+
+    /**
+     * Remove a gameobject from the handlers list
+     * @param object a gameobject
+     */
     public void removeObject(GameObject object){
         synchronized (lockObject) {
             gameObjects.remove(object);
         }
     }
+
+    /**
+     * Gets a list for all the projectiles,
+     * used by powersups to not get killed by
+     * hostile projectiles
+     * @return a list of projectiles
+     */
     public  List<BasicProjectile> getProjectiles(){
         List<BasicProjectile> projectiles=new ArrayList<>();
         for(int i=0; i < gameObjects.size(); i++){
@@ -81,6 +107,11 @@ public class Handler {
         }
         return projectiles;
     }
+
+    /**
+     * Empties the list of gameobjects,
+     * used in the end of the game
+     */
     public void clear(){
         gameObjects.clear();
     }

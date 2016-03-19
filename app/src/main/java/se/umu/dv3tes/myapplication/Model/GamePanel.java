@@ -8,11 +8,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import se.umu.dv3tes.myapplication.Activitys.EndActivity;
-import se.umu.dv3tes.myapplication.Activitys.MainActivity;
 import se.umu.dv3tes.myapplication.GameLogic.GameThread;
 import se.umu.dv3tes.myapplication.GameLogic.Handler;
 import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
@@ -20,11 +20,12 @@ import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 import se.umu.dv3tes.myapplication.Powerups.Powerups;
 import se.umu.dv3tes.myapplication.R;
 import se.umu.dv3tes.myapplication.GameLogic.Spawner;
-import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * The displaypanel wich shows the game on the screen and takes all
+ * userinput
+ * @author Tobias Estefors
  */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public   int WIDTH;
@@ -52,6 +53,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         BasicProjectile.setPicture(BitmapFactory.decodeResource(getResources(), R.drawable.projectile));
         BasicProjectile.setHostileImage(BitmapFactory.decodeResource(getResources(), R.drawable.test));
     }
+    /**
+     * This is called immediately after the surface is first created.
+     * @param holder The SurfaceHolder whose surface is being created.
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         Bitmap levelImage=BitmapFactory.decodeResource(getResources(),R.drawable.background);
@@ -72,11 +77,24 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
+
+    /**
+     * This is called immediately after any structural changes (format or
+     * size) have been made to the surface.
+     * @param holder The SurfaceHolder whose surface has changed.
+     * @param format The new PixelFormat of the surface.
+     * @param width The new width of the surface.
+     * @param height The new height of the surface.
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
     }
 
+    /**
+     * This is called immediately before a surface is being destroyed.
+     * @param holder The SurfaceHolder whose surface is being destroyed.
+     */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         try {
@@ -86,6 +104,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    /**
+     * Handles the clicks on the monitor, shoots projectiles at the desired location
+     * @param event The motion event.
+     * @return True if the event was handled, false otherwise.
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction() & MotionEvent.ACTION_MASK;
@@ -111,7 +134,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-
+    /**
+     * Updates the gamestate for all of the game
+     */
     public void tick(){
         if(!player.isAlive() && !gameOver){
             gameOver=true;
@@ -130,6 +155,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         hud.tick();
 
     }
+
+    /**
+     * Draw all gameobjects with their current state
+     * on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas){
         float scaleX= getWidth()/(WIDTH*1.f);

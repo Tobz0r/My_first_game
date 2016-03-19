@@ -12,7 +12,9 @@ import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
 
 /**
- * Created by Tobz0r on 2016-03-18.
+ * Powerup who gives the user multitouch to attack
+ * on different places at the same time
+ * @author Tobias Estefors
  */
 public class MultiAttack extends GameObject implements Powerup {
     private Handler handler;
@@ -34,6 +36,9 @@ public class MultiAttack extends GameObject implements Powerup {
     }
 
 
+    /**
+     * Updates the gamestate for this powerup
+     */
     @Override
     public void tick() {
         setX(getX() + getVelX());
@@ -50,6 +55,10 @@ public class MultiAttack extends GameObject implements Powerup {
         }
     }
 
+    /**
+     * Draws this powerup on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image, getX(), getY(), null);

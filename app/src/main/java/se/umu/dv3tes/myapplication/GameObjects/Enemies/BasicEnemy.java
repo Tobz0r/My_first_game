@@ -14,7 +14,8 @@ import se.umu.dv3tes.myapplication.R;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * A walking enemy with meleerange
+ * @author Tobias Estefors
  */
 public class BasicEnemy extends GameObject implements Enemy {
     private Player player;
@@ -51,6 +52,13 @@ public class BasicEnemy extends GameObject implements Enemy {
 
     }
 
+    /**
+     * Initate the pictures for all the states of this enemy, its static
+     * so it only initates them once
+     * @param numFrames number of images
+     * @param res the recources
+     * @param image one image for scaling
+     */
     private static void  initiateBitmaps(int numFrames, Resources res, Bitmap image){
         BitmapFactory.Options opts=new BitmapFactory.Options();
         opts.inDither=false;                     //Disable Dithering mode
@@ -78,6 +86,9 @@ public class BasicEnemy extends GameObject implements Enemy {
                 R.drawable.attack4,opts), image.getWidth() / 3, image.getHeight() / 3);
     }
 
+    /**
+     * Updates the gamestate for this gameobject
+     */
     @Override
     public void tick() {
         setX(getX() + getVelX());
@@ -102,6 +113,10 @@ public class BasicEnemy extends GameObject implements Enemy {
         }
     }
 
+    /**
+     * Used to draw this enemy on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
         setY(canvas.getHeight() - (getHeight()*3));

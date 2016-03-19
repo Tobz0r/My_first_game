@@ -89,8 +89,15 @@ public abstract class GameObject {
         return new Rect((int)x, (int) y,(int)(x+currentHealth),(int)y+height/3);
     }
 
+    /**
+     * Updates the gamestate for this gameobject
+     */
     public abstract void tick();
 
+    /**
+     * Used to draw this enemy on the board
+     * @param canvas the board
+     */
     public abstract void draw(Canvas canvas);
 
     public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
@@ -102,7 +109,7 @@ public abstract class GameObject {
         matrix.postScale(scaleWidth, scaleHeight);
         Bitmap resizedBitmap = Bitmap.createBitmap(
                 bm, 0, 0, width, height, matrix, false);
-        //bm.recycle();
+        bm.recycle();
         return resizedBitmap;
     }
 

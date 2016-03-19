@@ -18,7 +18,8 @@ import se.umu.dv3tes.myapplication.R;
 
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * An enemy wich is flying and have ranged attack
+ * @author Tobias Estefors
  */
 public class FlyingEnemy extends GameObject implements Enemy {
     private Player player;
@@ -57,6 +58,13 @@ public class FlyingEnemy extends GameObject implements Enemy {
 
     }
 
+    /**
+     * Initate the pictures for all the states of this enemy, its static
+     * so it only initates them once
+     * @param numFrames number of images
+     * @param res the recources
+     * @param image one image for scaling
+     */
     private static void  initiateBitmaps(int numFrames, Resources res, Bitmap image){
         BitmapFactory.Options opts=new BitmapFactory.Options();
         opts.inDither=false;                     //Disable Dithering mode
@@ -70,9 +78,11 @@ public class FlyingEnemy extends GameObject implements Enemy {
         movingImages[4]= getResizedBitmap(BitmapFactory.decodeResource(res, R.drawable.flying5,opts), image.getWidth() / 3, image.getHeight() / 3);
     }
 
+    /**
+     * Updates the gamestate for this gameobject
+     */
     @Override
     public void tick() {
-
         float distance= calculateDistance((int)player.getX(),(int)player.getY());
         if(goalDistance>= distance ||(getX()<=0)){
             setAttacking(true);
@@ -95,6 +105,10 @@ public class FlyingEnemy extends GameObject implements Enemy {
         }
     }
 
+    /**
+     * Used to draw this enemy on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
 
@@ -125,7 +139,3 @@ public class FlyingEnemy extends GameObject implements Enemy {
         return "FlyingEnemy";
     }
 }
-      /*  Paint myPaint = new Paint();
-        myPaint.setColor(Color.rgb(0, 0, 0));
-        myPaint.setStrokeWidth(10);
-        canvas.drawRect(getBounds(),myPaint);*/

@@ -1,7 +1,8 @@
 package se.umu.dv3tes.myapplication.Powerups;
 
 /**
- * Created by Tobz0r on 2016-03-17.
+ * Types of all powerups
+ * @author Tobias Estefors
  */
 public enum Powerups {
     DEFENSE,ATTACK,NONE,EVIL;

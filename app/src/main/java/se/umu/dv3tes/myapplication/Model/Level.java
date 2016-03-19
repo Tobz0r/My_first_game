@@ -6,7 +6,8 @@ import android.graphics.Canvas;
 import se.umu.dv3tes.myapplication.Model.GamePanel;
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * The background to draw on the map
+ * @author Tobias Estefors
  */
 public class Level {
 
@@ -20,6 +21,11 @@ public class Level {
         height=image.getHeight();
     }
 
+    /**
+     * Used before all other drawing to make sure that
+     * the name will be correctly animated
+     * @param canvas the board
+     */
     public void draw(Canvas canvas){
         canvas.drawBitmap(image,x,y,null);
         if(x < 0){

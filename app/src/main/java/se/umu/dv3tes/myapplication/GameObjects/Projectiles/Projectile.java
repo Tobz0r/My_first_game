@@ -2,11 +2,14 @@ package se.umu.dv3tes.myapplication.GameObjects.Projectiles;
 
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * Used to flag a gameobject that it is an projectile
  */
 public interface Projectile   {
 
+    /**
+     * Indicates if a projectile is hostile or not
+     * @return true if hostile else false
+     */
     boolean isHostile();
-    void finishProjectile();
 
 }

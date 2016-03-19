@@ -12,13 +12,15 @@ import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
 import se.umu.dv3tes.myapplication.GameObjects.Projectiles.BasicProjectile;
 import se.umu.dv3tes.myapplication.Powerups.DefensiveShield;
-import se.umu.dv3tes.myapplication.Powerups.EvilDecoy;
+import se.umu.dv3tes.myapplication.Powerups.DecoyPowerup;
 import se.umu.dv3tes.myapplication.Powerups.MultiAttack;
 import se.umu.dv3tes.myapplication.R;
 
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * Used to handle all spawning of gameobjects in the game
+ * @author Tobias Estefors
+ *
  */
 public class Spawner {
 
@@ -45,6 +47,11 @@ public class Spawner {
         this.random=new Random();
 
     }
+
+    /**
+     * Sets up the pictures so they only get setup once to save memory
+     * @param res resource with all pictures
+     */
     private void setUpPictures(Resources res){
         flyingPicture=BitmapFactory.decodeResource(res, R.drawable.flying1);
         walkingPicture=BitmapFactory.decodeResource(res,R.drawable.walking1);
@@ -57,6 +64,10 @@ public class Spawner {
         deathPicture= GameObject.getResizedBitmap(BitmapFactory.decodeResource(res,R.drawable.death),tempW/3,tempH/3);
     }
 
+    /**
+     * Used to spawn gameobjects every 100th tick,
+     * every tick it has a chanse to spawn a powerup
+     */
     public void tick() {
 
         scoreKeep++;
@@ -65,7 +76,7 @@ public class Spawner {
             if(powerUpValue==2) {
                 handler.addObject(new DefensiveShield(player, handler, shieldPicture, width));
             }else if(powerUpValue==3) {
-                handler.addObject(new EvilDecoy(player, handler, deathPicture, width));
+                handler.addObject(new DecoyPowerup(player, handler, deathPicture, width));
             }else {
                 handler.addObject(new MultiAttack(player,handler,swordPicture,width));
             }
@@ -103,11 +114,20 @@ public class Spawner {
         }
     }
 
+    /**
+     * Used to add projectiles to the game
+     * @param x the projectiles x-coordinate
+     * @param y the projectiles y-coordinate
+     */
     public void spawnProjectiles(int x, int y){
         handler.addObject(new BasicProjectile(player,x,y, handler,player));
 
     }
 
+    /**
+     * Gets called to see how far the player came
+     * @return a integer with the level
+     */
     public int getLevel(){
         return level;
     }

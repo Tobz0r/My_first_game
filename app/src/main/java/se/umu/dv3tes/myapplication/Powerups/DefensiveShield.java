@@ -36,6 +36,9 @@ public class DefensiveShield extends GameObject implements Powerup {
     }
 
 
+    /**
+     * Updates the gamestate for this powerup
+     */
     @Override
     public void tick() {
         setX(getX() + getVelX());
@@ -52,6 +55,10 @@ public class DefensiveShield extends GameObject implements Powerup {
         }
     }
 
+    /**
+     * Draws this powerup on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image, getX(), getY(), null);
