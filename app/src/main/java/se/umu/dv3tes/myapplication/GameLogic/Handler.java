@@ -81,5 +81,8 @@ public class Handler {
         }
         return projectiles;
     }
+    public void clear(){
+        gameObjects.clear();
+    }
 
 }

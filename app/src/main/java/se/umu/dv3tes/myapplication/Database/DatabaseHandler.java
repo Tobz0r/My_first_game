@@ -52,13 +52,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public List<PlayerUnit> getAllPlayers() {
-        List<PlayerUnit> players = new ArrayList<>();
+    public List<PlayerScore> getAllPlayers() {
+        List<PlayerScore> players = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_HIGHSCORE, null);
         if (cursor.moveToFirst()) {
             do {
-                players.add(new PlayerUnit(cursor.getString(0), Integer.parseInt(cursor.getString(1))));
+                players.add(new PlayerScore(cursor.getString(0), Integer.parseInt(cursor.getString(1))));
             }
             while (cursor.moveToNext());
         }

@@ -68,9 +68,6 @@ public class Player extends GameObject {
     @Override
     public void draw(Canvas canvas){
         setY(canvas.getHeight() - (getHeight() * 3));
-        Paint myPaint=new Paint();
-        myPaint.setColor(Color.BLUE);
-        canvas.drawRect(getBounds(),myPaint);
         canvas.drawBitmap(animator.getImage(),getX(),getY(),null);
     }
 

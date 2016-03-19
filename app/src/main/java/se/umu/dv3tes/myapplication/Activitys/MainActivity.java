@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import se.umu.dv3tes.myapplication.Database.DatabaseHandler;
-import se.umu.dv3tes.myapplication.Database.PlayerUnit;
+import se.umu.dv3tes.myapplication.Database.PlayerScore;
 import se.umu.dv3tes.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String currentDateandTime = sdf.format(new Date());
             String message;
-            List<PlayerUnit> players=db.getAllPlayers();
+            List<PlayerScore> players=db.getAllPlayers();
             if(players.size()!=0){
 
                 message="Best score:\n";

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import se.umu.dv3tes.myapplication.Database.DatabaseHandler;
-import se.umu.dv3tes.myapplication.Database.PlayerUnit;
+import se.umu.dv3tes.myapplication.Database.PlayerScore;
 import se.umu.dv3tes.myapplication.R;
 
 public class EndActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class EndActivity extends AppCompatActivity {
         TextView txt= (TextView) findViewById(R.id.textView);
         txt.setText("YOUR SCORE : " + getIntent().getExtras().get("Score"));
         nameEdit= (EditText) findViewById(R.id.editText);
+        nameEdit.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+
         saveBtn=(Button) findViewById(R.id.saveBtn);
         if(savedInstanceState!=null){
             saveBtn.setEnabled(savedInstanceState.getBoolean("Save"));
@@ -70,7 +73,7 @@ public class EndActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             String currentDateandTime = sdf.format(new Date());
             String message;
-            List<PlayerUnit> players=db.getAllPlayers();
+            List<PlayerScore> players=db.getAllPlayers();
             if(players.size()!=0){
 
                 message="Best score:\n";

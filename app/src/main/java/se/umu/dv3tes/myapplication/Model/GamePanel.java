@@ -122,6 +122,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(i);
             mediaPlayer.stop();
+            handler.clear();
             ((Activity) context).finish();
         }
         spawner.tick();

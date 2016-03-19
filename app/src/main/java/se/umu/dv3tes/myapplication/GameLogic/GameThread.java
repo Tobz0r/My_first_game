@@ -6,7 +6,9 @@ import android.view.SurfaceHolder;
 import se.umu.dv3tes.myapplication.Model.GamePanel;
 
 /**
- * Created by Tobz0r on 2016-03-15.
+ * The game is running all its mechanicas via this thread
+ * The game updates itself 60 times per second.
+ * @author Tobias Estefors
  */
 public class GameThread extends Thread {
 
@@ -21,6 +23,10 @@ public class GameThread extends Thread {
         this.gamePanel=gamePanel;
     }
 
+    /**
+     * Gets called when the thread starts, contains the updatelogic
+     * for the game.
+     */
     @Override
     public void run(){
         long lastTime = System.nanoTime();
@@ -55,11 +61,23 @@ public class GameThread extends Thread {
             }
         }
     }
+
+    /**
+     * Stops the thread from continuing to run even when a game is over
+     * @throws InterruptedException
+     */
     public void stopThread() throws InterruptedException {
         gameRunning=false;
         join();
 
     }
+
+    /**
+     * Gets called when you start the game or when you quit
+     * Sets the gamestate to running or not running
+     * @param gameRunning true if you wanna start the game,
+     *                    else false
+     */
     public void setGameRunning(boolean gameRunning){
         this.gameRunning=gameRunning;
     }
