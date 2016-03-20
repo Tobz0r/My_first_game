@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                             " " +players.get(i).getName()+"\n";
                 }
             }else{
-                message="No highscore yet";
+                message=getString(R.string.no_highscore);
             }
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle(R.string.action_highscore)
@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
         }
         if(id == R.id.action_About){
             new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("About")
-                    .setMessage("Made by Tobias Estefors")
+                    .setTitle(R.string.action_about)
+                    .setMessage(R.string.dialog_about)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

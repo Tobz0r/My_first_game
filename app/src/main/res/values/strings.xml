@@ -6,8 +6,12 @@
     <string name="action_exit">Exit</string>
     <string name="title_activity_end">EndActivity</string>
     <string name="action_help">Help</string>
+    <string name="dialog_about">Made by Tobias Estefors for cource "Utveckling av mobila
+        applikationer" at Umeå University\nSprites in this application are not my own and is made by
+    Boo at sprite-resources and from www.boogleech.com </string>
     <string name="dialog_help">Enemies will spawn every second so touch where you want to shoot.\n
         Powerups will be droped and there is three of them :\n Shield wich gives you 50% less damage taken, 
         swords wich gives you multitarget shooting and skull wich damages you for 10 damage.\n
         You lose when your healthbar is empty </string>
+    <string name="no_highscore">No highscore</string>
 </resources>

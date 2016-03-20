@@ -76,6 +76,10 @@ public class Boss extends GameObject implements Enemy{
         attackingImages[3]= BitmapFactory.decodeResource(res, R.drawable.boss4, opts);
         attackingImages[4]= BitmapFactory.decodeResource(res, R.drawable.boss5, opts);
     }
+    /**
+     * Gets called when you damage a flying enemy,
+     * a boss enemy takes 50 hits to kill
+     */
     @Override
     public void attackThis() {
         health-=2;

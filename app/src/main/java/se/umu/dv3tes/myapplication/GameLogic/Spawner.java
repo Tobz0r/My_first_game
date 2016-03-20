@@ -76,7 +76,6 @@ public class Spawner {
         scoreKeep++;
         int powerUpValue=(random.nextInt(1000)+1);
         if(powerUpValue<=3){
-            handler.addObject(new Boss(player, walkingPicture, width, height, handler,5,res));
 
             if(powerUpValue==2) {
                 handler.addObject(new DefensiveShield(player, handler, shieldPicture, width));
@@ -91,8 +90,6 @@ public class Spawner {
             level++;
             if (level == 1) {
                 handler.addObject(new BasicEnemy(player, walkingPicture, width, height, handler,5,res));
-                handler.addObject(new DefensiveShield(player,handler,shieldPicture,width));
-
             }
             if(level%2==0){
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
@@ -108,11 +105,9 @@ public class Spawner {
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
             }
             if (level % 25 == 0) {
-                handler.addObject(new BasicEnemy(player, walkingPicture, width, height, handler,5,res));
+                handler.addObject(new Boss(player, walkingPicture, width, height, handler,5,res));
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
-
             }
-
         }
     }
 
