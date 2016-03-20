@@ -17,8 +17,9 @@
         android:layout_height="wrap_content"
         android:text="New game"
         android:id="@+id/startBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="147dp" />
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignEnd="@+id/helpBtn" />
 
     <Button
         android:layout_width="wrap_content"
@@ -26,5 +27,14 @@
         android:text="Help"
         android:id="@+id/helpBtn"
         android:layout_below="@+id/startBtn"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Welcome to my game!"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

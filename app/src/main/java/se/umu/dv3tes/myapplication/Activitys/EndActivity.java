@@ -30,12 +30,12 @@ public class EndActivity extends AppCompatActivity {
 
     private EditText nameEdit;
     private DatabaseHandler db;
-    private Button saveBtn;
+    private Button saveBtn, playBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
-        Button playBtn= (Button) findViewById(R.id.playBtn);
+        playBtn= (Button) findViewById(R.id.playBtn);
         TextView txt= (TextView) findViewById(R.id.textView);
         txt.setText("YOUR SCORE : " + getIntent().getExtras().get("Score"));
         nameEdit= (EditText) findViewById(R.id.editText);
@@ -56,6 +56,7 @@ public class EndActivity extends AppCompatActivity {
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                playBtn.setEnabled(false);//to avoid spammiing
                 Intent i=new Intent(getApplicationContext(),GameActivity.class);
                 startActivity(i);
                 EndActivity.this.finish();
@@ -74,8 +75,6 @@ public class EndActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_Highscore) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            String currentDateandTime = sdf.format(new Date());
             String message;
             List<PlayerScore> players=db.getAllPlayers();
             if(players.size()!=0){
@@ -90,7 +89,7 @@ public class EndActivity extends AppCompatActivity {
                 message="No highscore yet";
             }
             new AlertDialog.Builder(EndActivity.this)
-                    .setTitle("Highscore")
+                    .setTitle(R.string.action_highscore)
                     .setMessage(message)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override

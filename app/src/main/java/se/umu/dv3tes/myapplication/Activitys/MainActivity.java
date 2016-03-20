@@ -27,6 +27,7 @@ import se.umu.dv3tes.myapplication.R;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHandler db;
+    private Button helpBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -36,13 +37,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         db=new DatabaseHandler(this);
-        Button newGame = (Button) findViewById(R.id.startBtn);
+        final Button newGame = (Button) findViewById(R.id.startBtn);
+        helpBtn=(Button) findViewById(R.id.helpBtn);
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                newGame.setEnabled(false);//to avoid spamming button to masstart activities
                 Intent i = new Intent(getApplicationContext(), GameActivity.class);
                 startActivity(i);
                 MainActivity.this.finish();
+            }
+        });
+        helpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.action_help)
+                        .setMessage(R.string.dialog_help)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .setNegativeButton(android.R.string.cancel,null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
 
@@ -74,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 message="No highscore yet";
             }
             new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Highscore")
+                    .setTitle(R.string.action_highscore)
                     .setMessage(message)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
