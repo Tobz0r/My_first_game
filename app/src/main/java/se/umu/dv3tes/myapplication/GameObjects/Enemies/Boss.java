@@ -85,6 +85,9 @@ public class Boss extends GameObject implements Enemy{
         health-=2;
     }
 
+    /**
+     * Updates the gamestate for this gameobject
+     */
     @Override
     public void tick() {
         setX(getX() + getVelX());
@@ -109,6 +112,11 @@ public class Boss extends GameObject implements Enemy{
         }
     }
 
+
+    /**
+     * Used to draw this enemy on the board
+     * @param canvas the board
+     */
     @Override
     public void draw(Canvas canvas) {
         setY(canvas.getHeight() - (getHeight()*3));
