@@ -37,7 +37,7 @@ public class EndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end);
         playBtn= (Button) findViewById(R.id.playBtn);
         TextView txt= (TextView) findViewById(R.id.textView);
-        txt.setText("YOUR SCORE : " + getIntent().getExtras().get("Score"));
+        txt.setText("YOUR SCORE : " + getIntent().getExtras().get("Score")+ " at level "+getIntent().getExtras().get("Level"));
         nameEdit= (EditText) findViewById(R.id.editText);
         nameEdit.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 

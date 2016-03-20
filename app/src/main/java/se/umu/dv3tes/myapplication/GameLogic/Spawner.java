@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import java.util.Random;
 
 import se.umu.dv3tes.myapplication.GameObjects.Enemies.BasicEnemy;
+import se.umu.dv3tes.myapplication.GameObjects.Enemies.Boss;
 import se.umu.dv3tes.myapplication.GameObjects.Enemies.FlyingEnemy;
 import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.GameObjects.Player.Player;
@@ -35,6 +36,7 @@ public class Spawner {
     private Bitmap shieldPicture;
     private Bitmap deathPicture;
     private Bitmap swordPicture;
+    private Bitmap bossPicture;
     private Random random;
 
     public Spawner(Handler handler, Resources res, Player player,int w, int h) {
@@ -58,6 +60,7 @@ public class Spawner {
         shieldPicture=BitmapFactory.decodeResource(res,R.drawable.shield);
         deathPicture=BitmapFactory.decodeResource(res,R.drawable.death);
         swordPicture=BitmapFactory.decodeResource(res,R.drawable.swords);
+        bossPicture=BitmapFactory.decodeResource(res,R.drawable.boss2);
         int tempW=deathPicture.getWidth();
         int tempH=deathPicture.getHeight();
         deathPicture.recycle();
@@ -73,6 +76,8 @@ public class Spawner {
         scoreKeep++;
         int powerUpValue=(random.nextInt(1000)+1);
         if(powerUpValue<=3){
+            handler.addObject(new Boss(player, walkingPicture, width, height, handler,5,res));
+
             if(powerUpValue==2) {
                 handler.addObject(new DefensiveShield(player, handler, shieldPicture, width));
             }else if(powerUpValue==3) {
@@ -93,8 +98,6 @@ public class Spawner {
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
                 handler.addObject(new BasicEnemy(player, walkingPicture, width, height, handler,5,res));
                 handler.addObject(new BasicEnemy(player, walkingPicture, width, height, handler,5,res));
-
-
             }
             if (level % 5 == 0) {
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
@@ -103,7 +106,6 @@ public class Spawner {
             if (level % 10 == 0) {
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
                 handler.addObject(new FlyingEnemy(player, flyingPicture, width, height, handler,5,res));
-
             }
             if (level % 25 == 0) {
                 handler.addObject(new BasicEnemy(player, walkingPicture, width, height, handler,5,res));
