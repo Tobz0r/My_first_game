@@ -1,9 +1,7 @@
-package se.umu.dv3tes.myapplication.Model;
+package se.umu.dv3tes.myapplication.View;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-
-import se.umu.dv3tes.myapplication.Model.GamePanel;
 
 /**
  * The background to draw on the map

@@ -3,7 +3,7 @@ package se.umu.dv3tes.myapplication.GameLogic;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import se.umu.dv3tes.myapplication.Model.GamePanel;
+import se.umu.dv3tes.myapplication.View.GamePanel;
 
 /**
  * The game is running all its mechanicas via this thread
@@ -35,25 +35,19 @@ public class GameThread extends Thread {
         double delta = 0;
         while(gameRunning){
             long now = System.nanoTime();
-            long wait = ns -(now-lastTime);
             delta += (now - lastTime) / ns;
             lastTime = now;
-            wait=wait < 0 ? 0 : wait;
-            /*try {
-                this.sleep(wait);
-            } catch (Exception e) {}*/
              while(delta >= 1){
                  gamePanel.tick();
-                 delta--; }
+                 delta--;
+             }
             canvas=null;
             try{
                 canvas=surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder){
                     gamePanel.draw(canvas);
                 }
-            }catch (Exception e){
-
-            }
+            }catch (Exception e){}
             finally {
                 if(canvas!=null){
                     surfaceHolder.unlockCanvasAndPost(canvas);
@@ -69,7 +63,6 @@ public class GameThread extends Thread {
     public void stopThread() throws InterruptedException {
         gameRunning=false;
         join();
-
     }
 
     /**

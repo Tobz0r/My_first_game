@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-import se.umu.dv3tes.myapplication.Model.Animator;
+import se.umu.dv3tes.myapplication.View.Animator;
 import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.Powerups.Powerups;
 import se.umu.dv3tes.myapplication.R;

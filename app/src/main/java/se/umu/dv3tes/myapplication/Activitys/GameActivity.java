@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import se.umu.dv3tes.myapplication.Model.GamePanel;
+import se.umu.dv3tes.myapplication.View.GamePanel;
 import se.umu.dv3tes.myapplication.R;
 
+/**
+ * The activity where the game is startiong
+ * @author Tobias Estefors
+ */
 public class GameActivity extends AppCompatActivity {
 
     private GamePanel gamePanel;

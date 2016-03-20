@@ -7,7 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import se.umu.dv3tes.myapplication.Model.Animator;
+import se.umu.dv3tes.myapplication.View.Animator;
 import se.umu.dv3tes.myapplication.GameObjects.GameObject;
 import se.umu.dv3tes.myapplication.GameLogic.Handler;
 import se.umu.dv3tes.myapplication.R;

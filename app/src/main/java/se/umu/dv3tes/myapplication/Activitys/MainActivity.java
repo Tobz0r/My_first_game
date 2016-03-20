@@ -22,7 +22,7 @@ import se.umu.dv3tes.myapplication.Database.PlayerScore;
 import se.umu.dv3tes.myapplication.R;
 
 /**
- * 
+ *
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_Highscore) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            String currentDateandTime = sdf.format(new Date());
             String message;
             List<PlayerScore> players=db.getAllPlayers();
             if(players.size()!=0){
@@ -117,6 +115,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Redefines the backbutton to exit the app if pressed at mainmenu
+     */
     @Override
     public void onBackPressed(){
         System.exit(0);

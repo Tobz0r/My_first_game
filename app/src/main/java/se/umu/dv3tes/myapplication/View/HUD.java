@@ -1,4 +1,4 @@
-package se.umu.dv3tes.myapplication.Model;
+package se.umu.dv3tes.myapplication.View;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

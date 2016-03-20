@@ -1,4 +1,4 @@
-package se.umu.dv3tes.myapplication.Model;
+package se.umu.dv3tes.myapplication.View;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
