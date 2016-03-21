@@ -138,6 +138,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
      */
     public void tick(){
         if(!player.isAlive() && !gameOver){
+            //To avoid game trying to masstart activitys on gameover
             gameOver=true;
             System.out.println("jebane");
             Intent i=new Intent(context,EndActivity.class);

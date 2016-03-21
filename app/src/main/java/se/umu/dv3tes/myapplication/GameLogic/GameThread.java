@@ -37,10 +37,10 @@ public class GameThread extends Thread {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
-             while(delta >= 1){
-                 gamePanel.tick();
-                 delta--;
-             }
+            while(delta >= 1){
+                gamePanel.tick();
+                delta--;
+            }
             canvas=null;
             try{
                 canvas=surfaceHolder.lockCanvas();
